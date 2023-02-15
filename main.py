@@ -18,14 +18,18 @@ def browseFiles():
     df = pd.read_excel(filename, sheet_name='Hoja1')
     mu = df["Edad"].mean()
     std = df["Edad"].std()
-    print(std)
     x = df["Edad"].tolist()
     x.sort()
-    print(x)
     y = 1/(std * np.sqrt(2*np.pi)) * np.exp(-0.5*((x-mu)/std)**2)
-    print(y)
     plt.plot(x,y,color="black")
     plt.show()
+
+    x = np.linspace(mu - 3*std, mu + 3*std, 100)
+    plt.plot(x, norm.pdf(x, mu, std))
+    plt.show()
+
+    print("Mean: "+mu)
+    print("Std: "+std)
 
 w = tk.Tk()
 w.title("Dogs and Normal Distribution")
